@@ -1,0 +1,62 @@
+package com.holubinka.controller;
+
+import com.holubinka.controller.external.model.UserRegistration;
+import com.holubinka.model.User;
+import com.holubinka.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
+
+@Controller
+public class UserController {
+
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login(ModelAndView vm) {
+        vm.addObject("user", new User());
+        vm.setViewName("login");
+        return vm;
+    }
+
+    /*@RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ModelAndView login(@ModelAttribute User user, ModelAndView vm) {
+        User u = userService.getByUsername(user.getUsername());
+        vm.addObject("user", u);
+        vm.setViewName("welcome");
+        return vm;
+    }*/
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public ModelAndView register(ModelAndView vm) {
+        vm.addObject("userRegistration", new UserRegistration());
+        vm.setViewName("register");
+        return vm;
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelAndView register(@ModelAttribute @Valid UserRegistration ur, BindingResult br, ModelAndView vm) {
+       if(br.hasErrors()) {
+           return new ModelAndView("register",br.getModel());
+       }
+        User user = UserRegistration.of(ur);
+        vm.addObject("user", userService.register(user));
+        vm.setViewName("welcome");
+        return vm;
+    }
+
+    @RequestMapping(value = "/email-verification/{token}", method = RequestMethod.GET)
+    public ModelAndView emailVerification(@PathVariable String token, ModelAndView vm){
+        vm.setViewName("success-verification");
+        vm.addObject("user",userService.emailVerification(token));
+        return vm;
+    }
+}
