@@ -10,5 +10,4 @@ public interface CategoryService {
 
     Category getById(Long id);
 
-    Category reduceCategoryPriceByPercents(Category category, int percents);
 }

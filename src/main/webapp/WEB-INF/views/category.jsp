@@ -15,13 +15,7 @@
 <h3>Category name: <c:out value="${category.categoryName}"/></h3>
 <p>Description: <c:out value="${category.categoryDescription}"/></p>
 <c:forEach items="${category.products}" var="p">
-    <p><%--<a href="<c:url value="/product?p_id=${p.id}"/>">--%><c:out value="${p.productsName}"/></p>
-    <p><%--<a href="<c:url value="/product?p_id=${p.id}"/>">--%><c:out value="${p.price}"/></p>
-    <hr/>
-    <br/>
+    <p>Products: <a href="<c:url value="/product?p_id=${p.id}"/>"><c:out value="${p.productsName}"/></a></p>
 </c:forEach>
-
-<h2><a href="<c:url value="/reduce?c_id=${category.id}"/>">Reduce</a> 10% price</h2>
-
 </body>
 </html>

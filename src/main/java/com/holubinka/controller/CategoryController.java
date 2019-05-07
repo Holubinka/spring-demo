@@ -29,12 +29,6 @@ public class CategoryController {
         return vm;
     }
 
-    @RequestMapping(value = "/reduce", method = RequestMethod.GET)
-    public ModelAndView increase(@RequestParam("c_id") Long id, ModelAndView vm) {
-        Category category = categoryService.getById(id);
-        vm.setViewName("category");
-        vm.addObject("category", categoryService.reduceCategoryPriceByPercents(category, 10));
-        return vm;
-    }
+
 
 }

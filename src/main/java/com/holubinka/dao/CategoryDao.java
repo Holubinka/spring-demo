@@ -9,5 +9,5 @@ public interface CategoryDao {
 
     Category getById(Long id);
 
-    Category save(Category category);
+
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: holyb
@@ -12,5 +13,6 @@
 </head>
 <body>
     <h1>Your email was successfully verified!</h1>
+    <h3><a href="<c:url value="/login"/>">Back to Login Page!</a></h3>
 </body>
 </html>

@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/home.jsp", true)
+                .defaultSuccessUrl("/home", true)
                 .failureUrl("/login?error")
                 .and()
                 .authorizeRequests()
